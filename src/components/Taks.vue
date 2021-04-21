@@ -14,6 +14,7 @@
             <textarea 
                 class="task__editor" 
                 v-model="message"
+                ref="editor"
                 @blur="closeEditor"
                 @keydown.enter="redactTask(task.id)"
                 ></textarea>
@@ -84,7 +85,7 @@
             },
             
             addFocusTextarea() {
-                const textarea = document.querySelector('.task__editor');
+                const textarea = this.$refs.editor;
                 if(textarea) {
                     textarea.focus();
                 }
