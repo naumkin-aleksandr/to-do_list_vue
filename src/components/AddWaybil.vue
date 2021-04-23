@@ -17,7 +17,7 @@
           <option value="RUEX">RUEX</option>
           <option value="RUSG">RUSG</option>
         </select>
-        <button class="btn-add" @click="addWaybill" type="submit">Сохранить</button>
+        <button class="btn-add" @click.prevent="addWaybill" type="submit">Сохранить</button>
       </form>
     </div>
     </div>
