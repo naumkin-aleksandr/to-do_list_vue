@@ -1,18 +1,18 @@
 <template>
-    <div 
-        class="task" 
+    <div
+        class="task"
         :class="{'task_disabled': task.status, 'task_padding-right': editor}"
         >
-        <button 
-            class="task__btn-toggle" 
+        <button
+            class="task__btn-toggle"
             :class="{'task__btn-toggle_active': task.status}"
             @click="toggle(task.id)"
             ></button>
         <span class="task__date" :class="{'task__date_disabled': task.status}">{{task.date}}</span>
 
         <div class="task__box-editor" v-if="editor">
-            <textarea 
-                class="task__editor" 
+            <textarea
+                class="task__editor"
                 v-model="message"
                 ref="editor"
                 @blur="closeEditor"
@@ -21,19 +21,19 @@
         </div>
         <p class="task__text" v-else >{{task.text}}</p>
 
-        <button 
+        <button
             class="task__btn-control task__btn-control_check-mark"
             v-if="editor"
             @mousedown="redactTask(task.id)"
             ></button>
 
-        <button 
+        <button
             class="task__btn-control task__btn-control_edit"
             :class="{'task__btn-control_disabled': editor}"
             @click="openEditor"
             ></button>
 
-        <button 
+        <button
             class="task__btn-control task__btn-control_delete"
             @mousedown="removeTask(task.id)"
             ></button>
@@ -41,61 +41,59 @@
     </div>
 </template>
 
-
-
 <script>
-    import {mapMutations} from 'vuex';
+import { mapMutations } from 'vuex';
 
-    export default {
-        name: 'Task',
-        data() {
-            return {
-                editor: false,
-                message: this.task.text,
-            }
-        },
-        props: {
-            task: {
-                type: Object,
-            }
-        },
-    
-        methods: {
-            ...mapMutations(['toggleStatus', 'deleteTask', 'editTask']),
-            toggle(id) {
-                this.toggleStatus(id);
-            },
+export default {
+  name: 'Task',
+  data() {
+    return {
+      editor: false,
+      message: this.task.text,
+    };
+  },
+  props: {
+    task: {
+      type: Object,
+    },
+  },
 
-            removeTask(id) {
-                this.deleteTask(id);
-            },
+  methods: {
+    ...mapMutations(['toggleStatus', 'deleteTask', 'editTask']),
+    toggle(id) {
+      this.toggleStatus(id);
+    },
 
-            redactTask(id) {
-                const text = this.message.trim();
-                this.editTask({id, text });
-                this.closeEditor();
-            },
+    removeTask(id) {
+      this.deleteTask(id);
+    },
 
-            openEditor() {
-                this.editor = true;
-            },
+    redactTask(id) {
+      const text = this.message.trim();
+      this.editTask({ id, text });
+      this.closeEditor();
+    },
 
-            closeEditor() {
-                this.editor = false;
-            },
-            
-            addFocusTextarea() {
-                const textarea = this.$refs.editor;
-                if(textarea) {
-                    textarea.focus();
-                }
-            }
+    openEditor() {
+      this.editor = true;
+    },
 
-        },
-        updated() {
-            this.addFocusTextarea();
-        }
-    }
+    closeEditor() {
+      this.editor = false;
+    },
+
+    addFocusTextarea() {
+      const textarea = this.$refs.editor;
+      if (textarea) {
+        textarea.focus();
+      }
+    },
+
+  },
+  updated() {
+    this.addFocusTextarea();
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -126,7 +124,7 @@
         &_padding-right {
             padding-right: 100px;
         }
-        
+
         &__btn-toggle {
             margin-right: 10px;
             min-width: 24px;

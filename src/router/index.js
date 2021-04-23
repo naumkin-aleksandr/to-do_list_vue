@@ -1,39 +1,26 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import TasksList from "../views/TasksList.vue";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import TabularView from '../views/TabularView.vue';
+import CardBlock from '../views/CardBlock.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
-    {
-        path: "/",
-        name: "TasksList",
-        component: TasksList,
-    },
-    {
-        path: "/addTask",
-        name: "AddTask",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import(/* webpackChunkName: "about" */ "../views/AddTask.vue"),
-    },
-
-    {
-        path: "/unfinishedTasks",
-        name: "UnfinishedTasks",
-        component: () => import("../views/UnfinishedTasks.vue"),
-    },
-    {
-        path: "/completedTasks",
-        name: "CompletedTasks",
-        component: () => import("../views/CompletedTasks.vue"),
-    },
+  {
+    path: '/',
+    name: 'TabularView',
+    component: TabularView,
+  },
+  {
+    path: '/cardBlock',
+    name: 'CardBlock',
+    component: CardBlock,
+  },
 ];
 
 const router = new VueRouter({
-    routes,
+  linkExactActiveClass: 'toggle__btn_active',
+  routes,
 });
 
 export default router;

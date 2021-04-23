@@ -1,9 +1,9 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import todoList from "./modules/todoList";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import waybills from './modules/waybills';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    modules: { todoList },
+  modules: { waybills },
 });
