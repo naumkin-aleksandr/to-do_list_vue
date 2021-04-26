@@ -1,22 +1,54 @@
 <template>
   <div class="filters">
     <h3 class="filters__title">Filters</h3>
-    <form class="filters__form" action="#">
+    <form class="filters__form" @submit.prevent action="#">
       <label
         class="filters__label"
         for="filter-number-Account"
       >
-        Номер накладной
+        Номер накладной:
       </label>
       <input
         class="filters__input"
+        id="filter-number-Account"
+        v-model="message"
+        @keyup.enter="callFilter"
         type="text"
         placeholder="Введите значение"
-        id="filter-number-Account"
       />
     </form>
+    <button
+      class="filters__btn-cancel"
+      :class="{'filters__btn-cancel_active': activeBtn}"
+      @click="closeFilter"
+      >Сбросить фильтор</button>
   </div>
 </template>
+
+<script>
+import { mapMutations } from 'vuex';
+
+export default {
+  data() {
+    return {
+      message: '',
+      activeBtn: false,
+    };
+  },
+  methods: {
+    ...mapMutations(['openResultFilter', 'closeResultFilter']),
+    callFilter() {
+      this.openResultFilter(this.message);
+      this.message = '';
+      this.activeBtn = true;
+    },
+    closeFilter() {
+      this.closeResultFilter();
+      this.activeBtn = false;
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
   .filters {
@@ -53,6 +85,23 @@
       background: #ffffff;
       border: 1px solid #d9d9d9;
       border-radius: 2px;
+    }
+
+    &__btn-cancel {
+      margin: 0 30px 15px;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #fff;
+      background: #4943cd;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &_active {
+        background: #a039a2;
+      }
     }
   }
 </style>

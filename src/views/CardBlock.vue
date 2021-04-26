@@ -1,6 +1,6 @@
 <template>
   <div class="card-list">
-    <CardItem  v-for="waybill in allWaybills" :key="waybill.id" :waybill="waybill"/>
+    <CardItem  v-for="waybill in getWaybills" :key="waybill.id" :waybill="waybill"/>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
     CardItem,
   },
   computed: {
-    ...mapGetters(['allWaybills']),
+    ...mapGetters(['getWaybills']),
   },
 };
 </script>

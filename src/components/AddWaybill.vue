@@ -8,7 +8,7 @@
       >
       <div class="wrap-form ">
         <h3>Добавление</h3>
-      <form>
+      <form  @submit.prevent="addWaybill">
         <label for="nomber">Номер накладной</label>
         <input id="number" type="text" v-model="number" placeholder="Введите значение">
         <label for="type">Тип заказа</label>
@@ -17,7 +17,7 @@
           <option value="RUEX">RUEX</option>
           <option value="RUSG">RUSG</option>
         </select>
-        <button class="btn-add" @click.prevent="addWaybill" type="submit">Сохранить</button>
+        <button class="btn-add" type="submit">Сохранить</button>
       </form>
     </div>
     </div>
@@ -82,7 +82,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 3;
 
     &_hide {
       width: 1px;

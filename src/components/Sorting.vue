@@ -1,58 +1,65 @@
 <template>
   <div class="sorting">
     <button
-        class="sorting__btn-open-list"
-        id="btn-sorting-open-list"
+      class="sorting__btn-open-list"
+      :class="{'sorting__btn-open-list_active': !sortingList}"
+      @click="openSortingList"
     >
-        Sorting
+      Sorting
     </button>
 
-    <ul class="sorting__list visuallyhidden" id="sorting-list">
-      <li class="sorting__item">
-        <button class="sorting__btn" id="ID-ascending">
-          ID - по возрастанию
-        </button>
-      </li>
-      <li class="sorting__item">
-        <button class="sorting__btn" id="ID-descending">
-            ID - по убыванию
-        </button>
-      </li>
-      <li class="sorting__item">
-        <button
-            class="sorting__btn"
-            id="date-creation-ascending"
-        >
-            Дата создания - по возрастанию
-        </button>
-      </li>
-      <li class="sorting__item">
-        <button
-            class="sorting__btn"
-            id="date-creation-descending"
-        >
-            Дата создания - по убыванию
-        </button>
-      </li>
-      <li class="sorting__item">
-        <button class="sorting__btn" id="type-order-RUED">
-            Тип заказа RUED
-        </button>
-      </li>
-      <li class="sorting__item">
-        <button class="sorting__btn" id="type-order-RUEX">
-          Тип заказа RUEX
-        </button>
-      </li>
-      <li class="sorting__item">
-        <button class="sorting__btn" id="type-order-RUSG">
-          Тип заказа RUSG
+    <ul
+      class="sorting__list"
+      :class="{visuallyhidden: sortingList}"
+      >
+      <li v-for="btn in listBtnSorting" :key="btn.type" class="sorting__item">
+        <button class="sorting__btn" @click="callSorting(btn.type)">
+          {{btn.text}}
         </button>
       </li>
     </ul>
-</div>
-<!-- /.sorting -->
+  </div>
 </template>
+
+<script>
+import { mapMutations } from 'vuex';
+
+export default {
+  data() {
+    return {
+      sortingList: true,
+      listBtnSorting: [
+        {
+          text: 'ID - по возрастанию',
+          type: 'IdAscending',
+        },
+        {
+          text: 'ID - по убыванию',
+          type: 'IdDescending',
+        },
+        {
+          text: 'Дата создания - по возрастанию',
+          type: 'dateAscending',
+        },
+        {
+          text: 'Дата создания - по убыванию',
+          type: 'dateDescending',
+        },
+      ],
+    };
+  },
+  methods: {
+    ...mapMutations(['sortingWaybills']),
+    callSorting(type) {
+      this.sortingWaybills(type);
+      this.openSortingList();
+    },
+    openSortingList() {
+      this.sortingList = !this.sortingList;
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
   .sorting {
@@ -78,20 +85,19 @@
       cursor: pointer;
 
     &::before {
-      content: "";
-      width: 10px;
-      height: 6px;
-      background-repeat: no-repeat;
-      background-position: -24px -18px;
+      content: "\276F";
+      font-size: 20px;
+      color: #4943cd;
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(-50%) rotate(90deg);
       right: 10px;
     }
 
       &_active {
         &::before {
-          transform: translateY(-50%) rotate(-90deg);
+          color: #a039a2;
+          transform: translateY(-50%) rotate(0deg);
         }
       }
     }
@@ -101,7 +107,7 @@
       position: absolute;
       top: 50px;
       left: 20px;
-      z-index: 4;
+      z-index: 2;
     }
 
     &__item {

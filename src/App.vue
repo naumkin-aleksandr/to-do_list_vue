@@ -15,7 +15,7 @@
 
 <script>
 
-import AddWaybill from './components/AddWaybil.vue';
+import AddWaybill from './components/AddWaybill.vue';
 import Sorting from './components/Sorting.vue';
 import Filters from './components/Filters.vue';
 import ToggleView from './components/ToggleView.vue';

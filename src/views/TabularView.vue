@@ -7,7 +7,7 @@
       <th>Дата создания</th>
       <th></th>
     </tr>
-    <TableItem v-for="waybill in allWaybills" :key="waybill.id" :waybill="waybill"/>
+    <TableItem v-for="waybill in getWaybills" :key="waybill.id" :waybill="waybill"/>
   </table>
 </template>
 
@@ -20,7 +20,7 @@ export default {
     TableItem,
   },
   computed: {
-    ...mapGetters(['allWaybills']),
+    ...mapGetters(['getWaybills']),
   },
 };
 </script>
