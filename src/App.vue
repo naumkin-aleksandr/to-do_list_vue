@@ -2,13 +2,13 @@
   <div class="app" id="app" >
     <h1 class="app__title">Тестовое задание</h1>
     <div class="app__wrap">
-      <AddWaybill/>
-      <div class="app__box">
-        <Sorting/>
+      <AddWaybill class="app__box-1"/>
+      <div class="app__box-2 app__box-flex">
+        <Sorting />
         <ToggleView/>
       </div>
-      <Filters/>
-      <router-view></router-view>
+      <Filters class="app__box-3"/>
+      <router-view class="app__box-4"></router-view>
     </div>
   </div>
 </template>
@@ -43,7 +43,6 @@ export default {
 
   .app {
     &__title {
-      min-width: 900px;
       margin-bottom: 40px;
       padding: 100px 110px;
       margin-bottom: 20px;
@@ -61,15 +60,40 @@ export default {
     }
 
     &__wrap {
-      padding: 30px 110px 30px 120px;
+      padding: 30px 110px;
       display: grid;
       grid: 70px auto / 280px 910px;
       grid-gap: 20px;
     }
 
-    &__box {
+    &__box-flex {
       display: flex;
       align-items: center;
+    }
+  }
+
+  @media (max-width: 1350px) {
+    .app {
+      &__title {
+        padding: 50px 30px;
+      }
+
+      &__wrap {
+        padding: 30px;
+        grid: repeat(4, auto)/ repeat(3, 1fr);
+      }
+
+      &__box {
+        &-2 {
+          grid-column: 2 /span 2;
+        }
+        &-3 {
+          width: 280px;
+        }
+        &-4 {
+          grid-column: 1 /span 3;
+        }
+      }
     }
   }
 </style>
