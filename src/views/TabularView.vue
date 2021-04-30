@@ -26,7 +26,6 @@ import TableTh from '../components/table/TableTh.vue';
 import TableWideRow from '../components/table/TableWideRow.vue';
 import TableCustomHeader from '../../stubs/components/TableCustomHeader.vue';
 import TableExtRowComponent from '../../stubs/components/TableExtRowComponent.vue';
-import TableCustomCell from '../../stubs/components/TableCustomCell.vue';
 
 export default {
   components: {
@@ -53,7 +52,6 @@ export default {
         {
           key: 'typ',
           title: 'Тип заказа',
-          useComponent: TableCustomCell,
         },
         {
           key: 'data',
@@ -62,6 +60,7 @@ export default {
         {
           key: 'actions',
           title: '',
+          useHeaderComponent: TableCustomHeader,
         },
       ],
       useExtRowComponent: TableExtRowComponent,

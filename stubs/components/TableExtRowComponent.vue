@@ -1,6 +1,10 @@
 <template>
   <div style="padding: 10px; background: #eee;">
-    ID: {{waybill.id}} <br>
+    ID: {{waybill.id}} /
+    Номер: {{waybill.number}} /
+    Тип: {{waybill.type}} /
+    Дата: {{waybill.date}} 
+    <br>
     (Здесь расширенная логика строк)
   </div>
 </template>
